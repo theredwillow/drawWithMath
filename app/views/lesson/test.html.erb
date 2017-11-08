@@ -1,0 +1,36 @@
+<!-- Roller Coaster Test -->
+<svg id="canvas" width="400" height="210">
+  <path id="parabola" />
+</svg>
+
+<script>
+	var parabola = document.getElementById("parabola");
+	var canvas = document.getElementById("canvas");
+	console.log(parabola);
+	console.log(canvas);
+
+	var convertAxes = function (point) {
+		if ( point.hasOwnProperty('x') )
+			point.x = point.x + (canvas.getAttribute("width")/2);
+		if ( point.hasOwnProperty('y') )
+			point.y = point.y - (canvas.getAttribute("height")/2);
+		return point;
+	};
+
+	var currentPoint = convertAxes({
+		x: 0,
+		y: 0 // x^2
+	});
+	var path = "M" + currentPoint.x + " " + currentPoint.y + " ";
+	var width = convertAxes({ x: canvas.getAttribute("width") }).x;
+	for (var i = 0; i <= width; i++) {
+		currentPoint = convertAxes({
+			x: i,
+			y: 0 - Math.pow(i, 2)
+		});
+		path += "L" + currentPoint.x + " " + currentPoint.y + " ";
+	}
+	path += "Z";
+	parabola.setAttribute("d", path);
+	
+</script>

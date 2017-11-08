@@ -1,0 +1,86 @@
+<% width ||= "500" %>
+<% height ||= (width.to_i/2).to_s %>
+
+<% xAxis ||= true %>
+<% yAxis ||= true %>
+
+<% increments ||= 10 %>
+
+<% canvasId ||= "myCanvas" %>
+
+<% cartesian ||= false %>
+
+<svg
+	id = "<%= canvasId %>"
+	width = "<%= width %>" height = "<%= height %>"
+	style="border:1px solid #d3d3d3;">
+  I'm sorry. Your browser doesn't support inline SVG elements. Please consider updating your browser.
+</svg>
+
+<script>
+	var canvas = document.getElementById("<%= canvasId %>");
+	var ctx = canvas.getContext("2d");
+	<% if cartesian %>
+	ctx.translate(canvas.width/2, canvas.height/2);
+	<% end %>
+
+	function drawPoint(x,y,size,caption) {
+		// <rect x="200" y="100.00" width="5" height="5" />
+	    size = size || 2;
+
+	    ctx.beginPath(); //Start path
+	    ctx.arc(x, y, size, 0, Math.PI * 2, true);
+	    ctx.fill();
+
+	    if (caption) {
+	    	if (caption === true){
+	    		caption = "(" + x + ", " + y + ")";
+	    	}
+		    ctx.font = "10px Arial";
+			ctx.fillText(caption, x+size, y-size);
+		}
+	}
+
+	<% if xAxis %>
+	ctx.moveTo( canvas.width/2, 0 );
+	ctx.lineTo( canvas.width/2, canvas.height );
+	ctx.stroke();
+	<% end %>
+
+	<% if yAxis %>
+	ctx.moveTo( 0, canvas.height/2 );
+	ctx.lineTo( canvas.width, canvas.height/2 );
+	ctx.stroke();
+	<% end %>
+
+	<% if increments != 0 %>
+	var increments = <%= increments %>;
+
+	var width = canvas.width / 2;
+	var height = canvas.height / 2;
+
+	for (var i = 0; i < width; i += increments) {
+		ctx.moveTo( width - i, height + 5 );
+		ctx.lineTo( width - i, height - 5 );
+		ctx.stroke();
+
+		ctx.moveTo( width + i, height + 5 );
+		ctx.lineTo( width + i, height - 5 );
+		ctx.stroke();
+	}
+
+	for (var j = 0; j < height; j += increments) {
+		ctx.moveTo( width - 5, height + j );
+		ctx.lineTo( width + 5, height + j );
+		ctx.stroke();
+
+		ctx.moveTo( width - 5, height - j );
+		ctx.lineTo( width + 5, height - j );
+		ctx.stroke();
+	}
+	<% end %>
+
+	drawPoint(width+30, height-25, 2, "(30, 25)");
+
+</script>
+

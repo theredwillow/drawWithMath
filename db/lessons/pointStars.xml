@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<lesson>
+	<info>
+		<title>Point Stars</title>
+		<tags>star,point,night,sky</tags>
+	</info>
+	<p>When you look up at the night sky, you see stars. Many are so far away they just look like dots. We can draw dots on a website to simulate that.</p>
+	<p>The first thing you must know is the coordinate system. A coordinate system is a representation of points and their locations.</p>
+	<p>It starts off very simple in one-dimension. That means you only have one number to take care of. They're usually represented from left to right (with numbers always being lower than the one to the right of them).</p>
+	<p>-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5</p>
+	<p>Then we move into two dimensions. That means you have two numbers to take care of. These are the dimensions we'll be using to draw our sky in this lesson (because, when you look at a picture of the night sky from directly below it, there is left-to-right and top-to-bottom).</p>
+	<svg />
+
+</lesson>
